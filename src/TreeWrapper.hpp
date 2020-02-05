@@ -4,7 +4,6 @@
 #include <boost/property_tree/ptree.hpp>
 
 
-
 /* Observer provides facility to find
  * some nodes inside tree using hash algorithm. */
 template< typename Tree >
@@ -26,7 +25,7 @@ public :
         m_key_map.emplace( key, node_ref );
     }
 
-    const Node& getNode( Key key )
+    const Node& getNode( const Key& key )
     {
         return m_key_map.find(key)->second;
     }
