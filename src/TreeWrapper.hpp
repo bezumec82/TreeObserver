@@ -53,7 +53,7 @@ public :
             m_tree.put( key, value ) );
     }
 
-    void add( const Key& key, Value& value )
+    void add( const Key& key, const Value& value )
     {
         m_observer.addValue( key, \
             m_tree.add( key, value ) );
