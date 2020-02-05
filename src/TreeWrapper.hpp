@@ -2,13 +2,19 @@
 #include <any>
 
 #include <boost/property_tree/ptree.hpp>
+#include <boost/unordered_map.hpp>
 
+template< typename Observer, typename Key, typename Value >
+class TreeWrapper;
 
 /* Observer provides facility to find
  * some nodes inside tree using hash algorithm. */
 template< typename Tree >
 class Observer
 {
+    template< typename Observer, typename Key, typename Value >
+    friend class TreeWrapper;
+
 public :
     using Node = Tree;
     using Key = typename Tree::key_type;
@@ -31,7 +37,8 @@ public :
     }
 
 private :
-    ::std::unordered_map< Key, const Node& > m_key_map;
+    //::std::unordered_map< Key, const Node& > m_key_map;
+    ::boost::unordered_map< Key, const Node& >m_key_map;
 };
 
 
@@ -41,6 +48,7 @@ class TreeWrapper
 {
     using Tree = typename ::boost::property_tree::basic_ptree< Key, Value >;
     using Node = Tree;
+    using SelfType = TreeWrapper;
 
 public :
     /* Set the value of the node at the given path to the supplied value. 
@@ -57,6 +65,13 @@ public :
         m_observer.addValue( key, \
             m_tree.add( key, value ) );
     }
+
+    void add_child( const Key& path, SelfType child )
+    {
+        m_observer.m_key_map.merge( child.m_observer.m_key_map );
+        m_tree.add_child( path , child.m_tree );
+    }
+
     const Node& find( const Key& key )
     {
         return m_tree.find( key )->second;
@@ -66,6 +81,7 @@ public :
     {
         return m_observer;
     }
+
 
 
 private :

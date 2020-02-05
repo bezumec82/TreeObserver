@@ -63,6 +63,11 @@
         "set": "cpp",
         "string": "cpp",
         "string_view": "cpp",
-        "variant": "cpp"
-    }
+        "variant": "cpp",
+        "bit": "cpp"
+    },
+    "cSpell.words": [
+        "basic",
+        "ptree"
+    ]
 }
