@@ -7,3 +7,15 @@ Results :
 In booth cases the same tree is used, where string is used as the key.
 Find time doesn't depend of size of tree.
 Look implementation.
+=== Update ===
+```::boost::property_tree``` internally uses ```::boost::multi_index``` which is much faster than hash in ```::std::unordered_map```.
+Problem with ```::boost::property_tree``` is that it is strongly dependent of class```string_path```, that imposes to use string-like classes as keys and some path separator :
+```
+template <typename String, typename Translator>
+    class string_path
+    {
+        ...
+        string_path(const char_type *value,
+            char_type separator = char_type('.'),
+            Translator tr = Translator());
+```
