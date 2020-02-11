@@ -2,10 +2,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "XMLparser",
+            "name": "TreeObserver",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/out/TreeExampleTest.out",
+            //"program": "${workspaceFolder}/out/TreeExampleTest.out",
             "args": [ ],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
